@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypingMaster - Practice Your Skills</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-keyboard"></i> TypingMaster</h1>
+            <p>Practice your typing skills with custom text and programming languages</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Selection Panel -->
+            <div class="selection-panel" id="selectionPanel">
+                <div class="selection-card">
+                    <h2>Choose Your Practice Mode</h2>
+                    
+                    <div class="mode-buttons">
+                        <button class="mode-btn" data-mode="text">
+                            <i class="fas fa-file-text"></i>
+                            <span>Text Practice</span>
+                        </button>
+                        <button class="mode-btn" data-mode="code">
+                            <i class="fas fa-code"></i>
+                            <span>Programming Languages</span>
+                        </button>
+                    </div>
+
+                    <!-- Text Mode Options -->
+                    <div class="text-options hidden" id="textOptions">
+                        <h3>Text Practice Options</h3>
+                        <div class="option-buttons">
+                            <button class="option-btn" data-option="random-text">Random Text</button>
+                            <button class="option-btn" data-option="custom-text">Custom Text</button>
+                        </div>
+                        
+                        <div class="custom-text-input hidden" id="customTextInput">
+                            <textarea placeholder="Enter your custom text here..." id="customTextArea"></textarea>
+                            <div class="text-actions">
+                                <label>
+                                    <input type="checkbox" id="shuffleText"> Shuffle text
+                                </label>
+                                <button class="start-btn" id="startCustomText">Start Practice</button>
+                            </div>
+                        </div>
+                        
+                        <div class="random-text-actions hidden" id="randomTextActions">
+                            <button class="start-btn" id="startRandomText">Start Random Text</button>
+                            <button class="new-snippet-btn" id="newSnippet">New Snippet</button>
+                        </div>
+                    </div>
+
+                    <!-- Code Mode Options -->
+                    <div class="code-options hidden" id="codeOptions">
+                        <h3>Choose Programming Language</h3>
+                        <div class="language-buttons">
+                            <button class="lang-btn" data-lang="javascript">
+                                <i class="fab fa-js-square"></i>
+                                JavaScript
+                            </button>
+                            <button class="lang-btn" data-lang="python">
+                                <i class="fab fa-python"></i>
+                                Python
+                            </button>
+                            <button class="lang-btn" data-lang="cpp">
+                                <i class="fas fa-code"></i>
+                                C++
+                            </button>
+                            <button class="lang-btn" data-lang="php">
+                                <i class="fab fa-php"></i>
+                                PHP
+                            </button>
+                            <button class="lang-btn" data-lang="css">
+                                <i class="fab fa-css3-alt"></i>
+                                CSS
+                            </button>
+                            <button class="lang-btn" data-lang="html">
+                                <i class="fab fa-html5"></i>
+                                HTML
+                            </button>
+                        </div>
+                        
+                        <div class="code-actions hidden" id="codeActions">
+                            <div class="code-options-row">
+                                <label>
+                                    <input type="checkbox" id="shuffleCode"> Shuffle code
+                                </label>
+                                <button class="start-btn" id="startCode">Start Practice</button>
+                                <button class="new-snippet-btn" id="newCodeSnippet">New Snippet</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Practice Panel -->
+            <div class="practice-panel hidden" id="practicePanel">
+                <div class="practice-header">
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-label">WPM</span>
+                            <span class="stat-value" id="wpm">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Accuracy</span>
+                            <span class="stat-value" id="accuracy">100%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Time</span>
+                            <span class="stat-value" id="timer">0s</span>
+                        </div>
+                    </div>
+                    <div class="practice-controls">
+                        <button class="control-btn" id="resetBtn">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                        <button class="control-btn" id="backBtn">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                    </div>
+                </div>
+
+                <div class="typing-area">
+                    <div class="text-display" id="textDisplay"></div>
+                    <textarea class="typing-input" id="typingInput" placeholder="Start typing here..." disabled></textarea>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="results-panel hidden" id="resultsPanel">
+                <div class="results-card">
+                    <h2><i class="fas fa-trophy"></i> Practice Complete!</h2>
+                    <div class="final-stats">
+                        <div class="final-stat">
+                            <span class="final-label">Words Per Minute</span>
+                            <span class="final-value" id="finalWpm">0</span>
+                        </div>
+                        <div class="final-stat">
+                            <span class="final-label">Accuracy</span>
+                            <span class="final-value" id="finalAccuracy">100%</span>
+                        </div>
+                        <div class="final-stat">
+                            <span class="final-label">Total Time</span>
+                            <span class="final-value" id="finalTime">0s</span>
+                        </div>
+                        <div class="final-stat">
+                            <span class="final-label">Characters Typed</span>
+                            <span class="final-value" id="finalChars">0</span>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button class="action-btn primary" id="practiceAgain">Practice Again</button>
+                        <button class="action-btn secondary" id="backToMenu">Back to Menu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sound Toggle -->
+        <div class="sound-toggle">
+            <button class="sound-btn" id="soundToggle">
+                <i class="fas fa-volume-up"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
