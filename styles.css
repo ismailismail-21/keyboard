@@ -217,26 +217,62 @@ body {
     font-size: 1.5rem;
 }
 
+/* Dynamic Button Grids */
+.language-button-grid, .text-type-button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.text-type-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.text-type-buttons h4, .language-buttons h4 {
+    font-size: 1.2rem;
+    margin: 1.5rem 0 0.5rem 0;
+    color: var(--text-color);
+    text-align: center;
+    grid-column: 1 / -1; /* Make h4 span all columns */
+}
+
 /* Custom Text Input */
-.custom-text-input textarea {
+.custom-text-input textarea, .custom-code-input textarea {
     width: 100%;
     min-height: 120px;
     padding: 1rem;
     border: 2px solid var(--border-color);
     border-radius: var(--border-radius);
     font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace; /* Use monospace for code */
     resize: vertical;
     transition: var(--transition);
     margin-bottom: 1rem;
     background: #181c24;
     color: #e2e8f0;
+    line-height: 1.5;
 }
 
-.custom-text-input textarea:focus {
+.custom-text-input textarea {
+    font-family: 'Poppins', sans-serif; /* Keep Poppins for regular text */
+}
+
+.custom-text-input textarea:focus, .custom-code-input textarea:focus {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.custom-text-input, .custom-code-input {
+    margin-top: 1.5rem;
+}
+
+.custom-code-input textarea {
+    min-height: 150px; /* Slightly taller for code */
 }
 
 .text-actions, .code-actions, .code-options-row {
@@ -246,7 +282,7 @@ body {
     gap: 1rem;
 }
 
-.text-actions label, .code-options-row label {
+.text-actions label, .code-actions label, .code-options-row label {
     display: flex;
     align-items: center;
     gap: 0.5rem;

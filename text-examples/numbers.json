@@ -1,0 +1,34 @@
+[
+    {
+        "title": "Basic Numbers 1-20",
+        "text": "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20. These are the fundamental numbers we use in everyday counting and mathematics."
+    },
+    {
+        "title": "Multiples of 10",
+        "text": "10 20 30 40 50 60 70 80 90 100 110 120 130 140 150 160 170 180 190 200. Practice typing these round numbers helps with numerical data entry."
+    },
+    {
+        "title": "Phone Number Format",
+        "text": "555-123-4567 (800) 555-0199 +1-555-867-5309 555.123.4567 5551234567. Different phone number formats are commonly used in business and personal communication."
+    },
+    {
+        "title": "Decimal Numbers",
+        "text": "3.14159 2.71828 1.41421 1.61803 0.57721 2.30259 1.20206 0.91596 1.64872 2.50663. Mathematical constants and decimal precision are important in scientific work."
+    },
+    {
+        "title": "Years and Dates",
+        "text": "2024 2023 2022 2021 2020 1990 1995 2000 2010 2015. Years are frequently typed in documents, forms, and historical references."
+    },
+    {
+        "title": "Number Words",
+        "text": "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty thirty forty fifty sixty seventy eighty ninety hundred thousand million billion"
+    },
+    {
+        "title": "Mixed Numbers",
+        "text": "The year 1969 was when humans first landed on the moon on July 20th. The temperature was 98.6 degrees Fahrenheit. There were 600 million people watching on TV around the world."
+    },
+    {
+        "title": "Financial Numbers",
+        "text": "$1,250.99 $50.00 $999,999.99 $12.34 $5,678.90 $100,000.00 $25.50 $7,890.12 $3,456.78 $89.99. Financial amounts with proper formatting including commas and decimal points."
+    }
+]

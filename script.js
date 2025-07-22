@@ -1,21 +1,13 @@
-// Sample texts and code snippets
-const textSamples = [
-    "The quick brown fox jumps over the lazy dog. This sentence contains all the letters of the alphabet and is perfect for typing practice.",
-    "In the midst of winter, I found there was, within me, an invincible summer. And that makes me happy. For it says that no matter how hard the world pushes against me, within me, there's something stronger.",
-    "The greatest glory in living lies not in never falling, but in rising every time we fall. Success is not final, failure is not fatal: it is the courage to continue that counts.",
-    "Life is what happens to you while you're busy making other plans. The future belongs to those who believe in the beauty of their dreams.",
-    "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe. Imagination is more important than knowledge.",
-    "Yesterday is history, tomorrow is a mystery, today is a gift of God, which is why we call it the present. The way to get started is to quit talking and begin doing."
-];
-
-// Dynamic code samples loaded from JSON files
+// Dynamic samples loaded from JSON files
 let availableLanguages = {};
+let availableTextTypes = {};
 let codeSamples = {};
+let textSamples = {};
 
-// Load available languages and their examples
+// Load available languages and text types
 async function loadLanguages() {
     try {
-        // Try to get list of language files dynamically
+        // Load programming languages
         const languages = ['javascript', 'python', 'cpp', 'php', 'css', 'html', 'csharp', 'golang', 'r'];
         
         for (const lang of languages) {
@@ -35,14 +27,37 @@ async function loadLanguages() {
             }
         }
         
-        // Generate language buttons dynamically
+        // Load text types
+        const textTypes = ['random', 'quotations', 'months', 'numbers', 'punctuation'];
+        
+        for (const textType of textTypes) {
+            try {
+                const response = await fetch(`text-examples/${textType}.json`);
+                if (response.ok) {
+                    const examples = await response.json();
+                    textSamples[textType] = examples;
+                    availableTextTypes[textType] = {
+                        name: formatTextTypeName(textType),
+                        icon: getTextTypeIcon(textType),
+                        examples: examples
+                    };
+                }
+            } catch (error) {
+                console.log(`Text file ${textType}.json not found or invalid`);
+            }
+        }
+        
+        // Generate buttons dynamically
         generateLanguageButtons();
+        generateTextTypeButtons();
         
     } catch (error) {
-        console.error('Error loading languages:', error);
+        console.error('Error loading content:', error);
         // Fallback to empty state
         codeSamples = {};
         availableLanguages = {};
+        textSamples = {};
+        availableTextTypes = {};
     }
 }
 
@@ -61,6 +76,17 @@ function formatLanguageName(lang) {
     return nameMap[lang] || lang.charAt(0).toUpperCase() + lang.slice(1);
 }
 
+function formatTextTypeName(textType) {
+    const nameMap = {
+        'random': 'Random Text',
+        'quotations': 'Famous Quotes',
+        'months': 'Months & Days',
+        'numbers': 'Numbers',
+        'punctuation': 'Punctuation'
+    };
+    return nameMap[textType] || textType.charAt(0).toUpperCase() + textType.slice(1);
+}
+
 function getLanguageIcon(lang) {
     const iconMap = {
         'javascript': 'fab fa-js-square',
@@ -76,14 +102,47 @@ function getLanguageIcon(lang) {
     return iconMap[lang] || 'fas fa-code';
 }
 
+function getTextTypeIcon(textType) {
+    const iconMap = {
+        'random': 'fas fa-random',
+        'quotations': 'fas fa-quote-right',
+        'months': 'fas fa-calendar',
+        'numbers': 'fas fa-calculator',
+        'punctuation': 'fas fa-exclamation'
+    };
+    return iconMap[textType] || 'fas fa-font';
+}
+
 function generateLanguageButtons() {
-    const languageButtonsContainer = document.querySelector('.language-buttons');
-    if (!languageButtonsContainer) return;
+    const codeOptionsContainer = document.getElementById('codeOptions');
+    if (!codeOptionsContainer) return;
     
-    // Clear existing buttons
+    // Find or create the language buttons container
+    let languageButtonsContainer = codeOptionsContainer.querySelector('.language-buttons');
+    if (!languageButtonsContainer) {
+        languageButtonsContainer = document.createElement('div');
+        languageButtonsContainer.className = 'language-buttons';
+        languageButtonsContainer.innerHTML = '<h4>Choose Programming Language</h4>';
+        
+        // Insert after the existing option-buttons container
+        const existingButtons = codeOptionsContainer.querySelector('.option-buttons');
+        if (existingButtons) {
+            existingButtons.insertAdjacentElement('afterend', languageButtonsContainer);
+        } else {
+            codeOptionsContainer.appendChild(languageButtonsContainer);
+        }
+    }
+    
+    // Clear existing language buttons but keep the h4
+    const h4 = languageButtonsContainer.querySelector('h4');
     languageButtonsContainer.innerHTML = '';
+    if (h4) {
+        languageButtonsContainer.appendChild(h4);
+    } else {
+        languageButtonsContainer.innerHTML = '<h4>Choose Programming Language</h4>';
+    }
     
-    // Create buttons for each available language
+    // Create buttons for each available language directly in the container
     Object.keys(availableLanguages).forEach(langKey => {
         const lang = availableLanguages[langKey];
         const button = document.createElement('button');
@@ -100,10 +159,56 @@ function generateLanguageButtons() {
     attachLanguageButtonListeners();
 }
 
+function generateTextTypeButtons() {
+    const textOptionsContainer = document.getElementById('textOptions');
+    if (!textOptionsContainer) return;
+    
+    // Find or create the text type buttons container
+    let textTypeButtonsContainer = textOptionsContainer.querySelector('.text-type-buttons');
+    if (!textTypeButtonsContainer) {
+        textTypeButtonsContainer = document.createElement('div');
+        textTypeButtonsContainer.className = 'text-type-buttons';
+        textTypeButtonsContainer.innerHTML = '<h4>Choose Text Type</h4>';
+        
+        // Insert after the existing option-buttons container
+        const existingButtons = textOptionsContainer.querySelector('.option-buttons');
+        if (existingButtons) {
+            existingButtons.insertAdjacentElement('afterend', textTypeButtonsContainer);
+        } else {
+            textOptionsContainer.appendChild(textTypeButtonsContainer);
+        }
+    }
+    
+    // Clear existing text type buttons but keep the h4
+    const h4 = textTypeButtonsContainer.querySelector('h4');
+    textTypeButtonsContainer.innerHTML = '';
+    if (h4) {
+        textTypeButtonsContainer.appendChild(h4);
+    } else {
+        textTypeButtonsContainer.innerHTML = '<h4>Choose Text Type</h4>';
+    }
+    
+    // Create buttons for each available text type directly in the container
+    Object.keys(availableTextTypes).forEach(textTypeKey => {
+        const textType = availableTextTypes[textTypeKey];
+        const button = document.createElement('button');
+        button.className = 'option-btn text-type-btn';
+        button.setAttribute('data-text-type', textTypeKey);
+        button.innerHTML = `
+            <i class="${textType.icon}"></i>
+            ${textType.name}
+        `;
+        textTypeButtonsContainer.appendChild(button);
+    });
+    
+    // Attach event listeners for text type buttons
+    attachTextTypeButtonListeners();
+}
+
 function attachLanguageButtonListeners() {
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove active class from all buttons
+            // Remove active class from all language buttons
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             // Add active class to clicked button
             btn.classList.add('active');
@@ -111,11 +216,25 @@ function attachLanguageButtonListeners() {
             // Set current language
             currentLanguage = btn.getAttribute('data-lang');
             
-            // Show code actions
-            const codeActions = document.getElementById('codeActions');
-            if (codeActions) {
-                codeActions.classList.remove('hidden');
-            }
+            // Start practice directly when language is clicked
+            startCodePractice();
+        });
+    });
+}
+
+function attachTextTypeButtonListeners() {
+    document.querySelectorAll('.text-type-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all text type buttons
+            document.querySelectorAll('.text-type-btn').forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+            
+            // Set current text type
+            currentTextType = btn.getAttribute('data-text-type');
+            
+            // Start practice directly when text type is clicked
+            startRandomTextPractice();
         });
     });
 }
@@ -123,6 +242,7 @@ function attachLanguageButtonListeners() {
 // App State
 let currentMode = null;
 let currentLanguage = null;
+let currentTextType = null;
 let currentText = '';
 let currentIndex = 0;
 let startTime = null;
@@ -226,6 +346,7 @@ function setupEventListeners() {
 
     // Start buttons
     document.getElementById('startCustomText')?.addEventListener('click', startCustomTextPractice);
+    document.getElementById('startCustomCode')?.addEventListener('click', startCustomCodePractice);
     document.getElementById('startRandomText')?.addEventListener('click', startRandomTextPractice);
     document.getElementById('startCode')?.addEventListener('click', startCodePractice);
 
@@ -268,15 +389,40 @@ function selectMode(mode) {
 }
 
 function selectTextOption(option) {
-    // Update button states
-    document.querySelectorAll('.option-btn').forEach(btn => {
+    // Update button states for regular option buttons (like custom-text)
+    document.querySelectorAll('.option-btn:not(.text-type-btn):not(.lang-btn)').forEach(btn => {
         btn.classList.remove('active');
     });
     document.querySelector(`[data-option="${option}"]`)?.classList.add('active');
     
-    // Show appropriate inputs
+    // Show appropriate inputs for text options
     customTextInput?.classList.toggle('hidden', option !== 'custom-text');
-    randomTextActions?.classList.toggle('hidden', option !== 'random-text');
+    
+    // Hide random text actions when custom text is selected
+    if (option === 'custom-text') {
+        randomTextActions?.classList.add('hidden');
+        // Also deactivate text type buttons
+        document.querySelectorAll('.text-type-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        currentTextType = null;
+    }
+    
+    // Show appropriate inputs for code options
+    if (option === 'custom-code') {
+        const customCodeInput = document.getElementById('customCodeInput');
+        customCodeInput?.classList.remove('hidden');
+        // Hide code actions and deactivate language buttons
+        const codeActions = document.getElementById('codeActions');
+        codeActions?.classList.add('hidden');
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        currentLanguage = null;
+    } else {
+        const customCodeInput = document.getElementById('customCodeInput');
+        customCodeInput?.classList.add('hidden');
+    }
 }
 
 function selectLanguage(lang) {
@@ -308,9 +454,34 @@ function startCustomTextPractice() {
     startPractice();
 }
 
+function startCustomCodePractice() {
+    const code = document.getElementById('customCodeArea')?.value.trim();
+    const shouldShuffle = document.getElementById('shuffleCustomCode')?.checked;
+    
+    if (!code) {
+        alert('Please enter some code to practice with.');
+        return;
+    }
+    
+    currentText = shouldShuffle ? shuffleText(code) : code;
+    startPractice();
+}
+
 function startRandomTextPractice() {
-    const randomIndex = Math.floor(Math.random() * textSamples.length);
-    currentText = textSamples[randomIndex];
+    // Use the selected text type or default to first available
+    let selectedTextType = currentTextType;
+    if (!selectedTextType || !textSamples[selectedTextType]) {
+        selectedTextType = Object.keys(availableTextTypes)[0];
+    }
+    
+    if (!selectedTextType || !textSamples[selectedTextType]) {
+        alert('No text samples available. Please check your text-examples directory.');
+        return;
+    }
+    
+    const samples = textSamples[selectedTextType];
+    const randomIndex = Math.floor(Math.random() * samples.length);
+    currentText = samples[randomIndex].text;
     startPractice();
 }
 
@@ -330,8 +501,21 @@ function startCodePractice() {
 }
 
 function generateNewTextSnippet() {
-    const randomIndex = Math.floor(Math.random() * textSamples.length);
-    currentText = textSamples[randomIndex];
+    // Use the selected text type or default to first available
+    let selectedTextType = currentTextType;
+    if (!selectedTextType || !textSamples[selectedTextType]) {
+        selectedTextType = Object.keys(availableTextTypes)[0];
+    }
+    
+    if (!selectedTextType || !textSamples[selectedTextType]) {
+        alert('No text samples available. Please check your text-examples directory.');
+        return;
+    }
+    
+    const samples = textSamples[selectedTextType];
+    const randomIndex = Math.floor(Math.random() * samples.length);
+    currentText = samples[randomIndex].text;
+    
     if (practicePanel?.classList.contains('hidden')) {
         startPractice();
     } else {
@@ -705,15 +889,18 @@ function backToSelection() {
 }
 
 function resetSubSelections() {
-    document.querySelectorAll('.option-btn, .lang-btn').forEach(btn => {
+    document.querySelectorAll('.option-btn, .lang-btn, .text-type-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     
     customTextInput?.classList.add('hidden');
+    const customCodeInput = document.getElementById('customCodeInput');
+    customCodeInput?.classList.add('hidden');
     randomTextActions?.classList.add('hidden');
     codeActions?.classList.add('hidden');
     
     currentLanguage = null;
+    currentTextType = null;
 }
 
 function toggleSound() {

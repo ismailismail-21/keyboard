@@ -1,0 +1,34 @@
+[
+    {
+        "title": "Common Punctuation",
+        "text": "Hello, world! How are you? I'm fine, thank you. It's a beautiful day; the sun is shining. \"What time is it?\" she asked. He replied, \"It's 3:30 PM.\" Wow! That's great."
+    },
+    {
+        "title": "Special Characters",
+        "text": "@#$%^&*()_+-=[]{}|;':\",./<>? Email: user@example.com Password: P@ssw0rd! Website: https://www.example.com Phone: (555) 123-4567"
+    },
+    {
+        "title": "Brackets and Parentheses",
+        "text": "Arrays [1, 2, 3, 4, 5] and objects {name: \"John\", age: 30} are common in programming. Mathematical expressions like (a + b) * (c - d) use parentheses for grouping."
+    },
+    {
+        "title": "Quotation Practice",
+        "text": "\"The best way to predict the future is to invent it,\" said Alan Kay. 'Single quotes' and \"double quotes\" are both used in writing. Programming languages use quotes: 'string' and \"another string\"."
+    },
+    {
+        "title": "Semicolons and Colons",
+        "text": "There are three things to remember: practice, patience, and persistence. JavaScript uses semicolons; they separate statements. Time format: 12:30 PM; Date format: 2024:01:15."
+    },
+    {
+        "title": "Dashes and Hyphens",
+        "text": "Well-known facts include: mother-in-law, twenty-one, self-confident. Em dashes—like this one—separate clauses. En dashes (1990–2000) show ranges. Hyphens connect compound words."
+    },
+    {
+        "title": "Mathematical Symbols",
+        "text": "Basic math: 2 + 3 = 5, 10 - 4 = 6, 3 * 7 = 21, 15 / 3 = 5. Advanced: 2^3 = 8, √16 = 4, π ≈ 3.14159, ∞ represents infinity. Comparison: 5 > 3, 2 < 7, 4 ≤ 4, 6 ≥ 5, 3 ≠ 4."
+    },
+    {
+        "title": "Mixed Punctuation",
+        "text": "Dr. Smith said, \"The patient's temperature is 98.6°F.\" The meeting is scheduled for 2:30 PM; however, it might be delayed. Please review items #1, #2, and #3 before Friday's deadline."
+    }
+]
