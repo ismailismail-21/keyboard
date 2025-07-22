@@ -1,0 +1,14 @@
+[
+  {
+    "title": "User Registration Form",
+    "code": "<?php\nclass UserRegistration {\n\tprivate $db;\n\t\n\tpublic function __construct($database) {\n\t\t$this->db = $database;\n\t}\n\t\n\tpublic function registerUser($username, $email, $password) {\n\t\t$hashedPassword = password_hash($password, PASSWORD_DEFAULT);\n\t\t\n\t\t$stmt = $this->db->prepare(\n\t\t\t\"INSERT INTO users (username, email, password) VALUES (?, ?, ?)\"\n\t\t);\n\t\t\n\t\treturn $stmt->execute([$username, $email, $hashedPassword]);\n\t}\n\t\n\tpublic function validateEmail($email) {\n\t\treturn filter_var($email, FILTER_VALIDATE_EMAIL);\n\t}\n}"
+  },
+  {
+    "title": "Array Functions",
+    "code": "<?php\n$fruits = ['apple', 'banana', 'orange', 'grape'];\n$numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];\n\n// Filter even numbers\n$evenNumbers = array_filter($numbers, function($n) {\n\treturn $n % 2 === 0;\n});\n\n// Transform array\n$upperFruits = array_map('strtoupper', $fruits);\n\n// Reduce array\n$sum = array_reduce($numbers, function($carry, $item) {\n\treturn $carry + $item;\n}, 0);\n\necho \"Even numbers: \" . implode(', ', $evenNumbers) . \"\\n\";\necho \"Upper fruits: \" . implode(', ', $upperFruits) . \"\\n\";\necho \"Sum: $sum\\n\";\n?>"
+  },
+  {
+    "title": "API Response Handler",
+    "code": "<?php\nheader('Content-Type: application/json');\n\nclass ApiResponse {\n\tpublic static function success($data, $message = 'Success') {\n\t\thttp_response_code(200);\n\t\treturn json_encode([\n\t\t\t'status' => 'success',\n\t\t\t'message' => $message,\n\t\t\t'data' => $data\n\t\t]);\n\t}\n\t\n\tpublic static function error($message, $code = 400) {\n\t\thttp_response_code($code);\n\t\treturn json_encode([\n\t\t\t'status' => 'error',\n\t\t\t'message' => $message,\n\t\t\t'data' => null\n\t\t]);\n\t}\n}\n\n// Usage\necho ApiResponse::success(['id' => 1, 'name' => 'John']);\n?>"
+  }
+]

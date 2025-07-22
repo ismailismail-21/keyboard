@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Hello World",
+    "code": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\tfmt.Println(\"Hello, World!\")\n}"
+  },
+  {
+    "title": "Goroutines",
+    "code": "package main\n\nimport (\n\t\"fmt\"\n\t\"time\"\n)\n\nfunc worker(id int, jobs <-chan int, results chan<- int) {\n\tfor j := range jobs {\n\t\tfmt.Println(\"worker\", id, \"started job\", j)\n\t\ttime.Sleep(time.Second)\n\t\tfmt.Println(\"worker\", id, \"finished job\", j)\n\t\tresults <- j * 2\n\t}\n}\n\nfunc main() {\n\tconst numJobs = 5\n\tjobs := make(chan int, numJobs)\n\tresults := make(chan int, numJobs)\n\n\tfor w := 1; w <= 3; w++ {\n\t\tgo worker(w, jobs, results)\n\t}\n\n\tfor j := 1; j <= numJobs; j++ {\n\t\tjobs <- j\n\t}\n\tclose(jobs)\n\n\tfor a := 1; a <= numJobs; a++ {\n\t\t<-results\n\t}\n}"
+  },
+  {
+    "title": "Struct and Methods",
+    "code": "package main\n\nimport \"fmt\"\n\ntype Person struct {\n\tName string\n\tAge  int\n}\n\nfunc (p Person) String() string {\n\treturn fmt.Sprintf(\"%s (%d years old)\", p.Name, p.Age)\n}\n\nfunc (p *Person) Birthday() {\n\tp.Age++\n}\n\nfunc main() {\n\tp := Person{Name: \"Alice\", Age: 25}\n\tfmt.Println(p)\n\t\n\tp.Birthday()\n\tfmt.Println(\"After birthday:\", p)\n}"
+  }
+]

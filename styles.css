@@ -371,29 +371,45 @@ body {
     min-height: 300px;
     max-height: 400px;
     font-family: 'Courier New', monospace;
-    font-size: 1.1rem;
-    line-height: 1.6;
+
+    font-size: 1.2rem;
+    line-height: 1.8;
     margin-bottom: 1rem;
     white-space: pre-wrap;
     word-wrap: break-word;
-    color: #f8fafc;
+    color: #64748b;
     overflow-y: auto;
     scroll-behavior: smooth;
+    outline: none;
+    cursor: text;
+    position: relative;
+    caret-color: transparent;
+}
+
+.text-display:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
 }
 
 .text-display .char {
     position: relative;
-    transition: var(--transition);
+    transition: all 0.2s ease;
+}
+
+.text-display .char.typed {
+    color: #4a5568;
+    opacity: 0.4;
 }
 
 .text-display .char.correct {
-    background-color: rgba(76, 175, 80, 0.2);
     color: var(--success-color);
+    opacity: 0.6;
 }
 
 .text-display .char.incorrect {
-    background-color: rgba(244, 67, 54, 0.2);
+    background-color: rgba(244, 67, 54, 0.3);
     color: var(--error-color);
+    border-radius: 3px;
 }
 
 .text-display .char.current {
@@ -401,13 +417,22 @@ body {
     color: white;
     animation: blink 1s infinite;
     box-shadow: 0 0 8px rgba(102, 126, 234, 0.5);
+    border-radius: 2px;
+}
+
+/* Cursor for empty input - disabled since we use character-based cursor */
+.text-display:empty::before {
+    display: none;
 }
 
 /* Special styling for tab characters */
 .text-display .char.tab::before {
     content: '→';
     color: #64748b;
-    opacity: 0.5;
+    opacity: 0.3;
+    position: absolute;
+    font-size: 0.8em;
+    top: -2px;
 }
 
 /* Custom scrollbar for text display */
@@ -427,6 +452,11 @@ body {
 
 .text-display::-webkit-scrollbar-thumb:hover {
     background: #667eea;
+}
+
+/* Hide the old typing input styles */
+.typing-input {
+    display: none;
 }
 
 .typing-input {

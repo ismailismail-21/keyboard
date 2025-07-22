@@ -1,0 +1,14 @@
+[
+  {
+    "title": "LINQ Operations",
+    "code": "using System;\nusing System.Collections.Generic;\nusing System.Linq;\n\npublic class Program\n{\n\tpublic static void Main()\n\t{\n\t\tvar numbers = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };\n\t\t\n\t\tvar evenNumbers = numbers\n\t\t\t.Where(n => n % 2 == 0)\n\t\t\t.Select(n => n * 2)\n\t\t\t.ToList();\n\t\t\n\t\tConsole.WriteLine(\"Even numbers doubled:\");\n\t\tevenNumbers.ForEach(Console.WriteLine);\n\t}\n}"
+  },
+  {
+    "title": "Property and Constructor",
+    "code": "public class Person\n{\n\tpublic string Name { get; set; }\n\tpublic int Age { get; private set; }\n\tpublic string Email { get; init; }\n\t\n\tpublic Person(string name, int age, string email)\n\t{\n\t\tName = name ?? throw new ArgumentNullException(nameof(name));\n\t\tAge = age > 0 ? age : throw new ArgumentException(\"Age must be positive\");\n\t\tEmail = email ?? throw new ArgumentNullException(nameof(email));\n\t}\n\t\n\tpublic void HaveBirthday()\n\t{\n\t\tAge++;\n\t\tConsole.WriteLine($\"Happy birthday {Name}! You are now {Age} years old.\");\n\t}\n\t\n\tpublic override string ToString()\n\t{\n\t\treturn $\"Name: {Name}, Age: {Age}, Email: {Email}\";\n\t}\n}"
+  },
+  {
+    "title": "Async File Operations",
+    "code": "using System;\nusing System.IO;\nusing System.Threading.Tasks;\nusing System.Text.Json;\n\npublic class FileService\n{\n\tpublic async Task<T> ReadJsonAsync<T>(string filePath)\n\t{\n\t\ttry\n\t\t{\n\t\t\tstring jsonString = await File.ReadAllTextAsync(filePath);\n\t\t\treturn JsonSerializer.Deserialize<T>(jsonString);\n\t\t}\n\t\tcatch (Exception ex)\n\t\t{\n\t\t\tConsole.WriteLine($\"Error reading file: {ex.Message}\");\n\t\t\tthrow;\n\t\t}\n\t}\n\t\n\tpublic async Task WriteJsonAsync<T>(string filePath, T data)\n\t{\n\t\ttry\n\t\t{\n\t\t\tstring jsonString = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });\n\t\t\tawait File.WriteAllTextAsync(filePath, jsonString);\n\t\t}\n\t\tcatch (Exception ex)\n\t\t{\n\t\t\tConsole.WriteLine($\"Error writing file: {ex.Message}\");\n\t\t\tthrow;\n\t\t}\n\t}\n}"
+  }
+]

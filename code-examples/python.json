@@ -1,0 +1,18 @@
+[
+  {
+    "title": "List Comprehension",
+    "code": "def fibonacci(n):\n\tif n <= 1:\n\t\treturn n\n\treturn fibonacci(n - 1) + fibonacci(n - 2)\n\nnumbers = [fibonacci(i) for i in range(10)]\nprint(f'Fibonacci sequence: {numbers}')"
+  },
+  {
+    "title": "Class Example",
+    "code": "class Person:\n\tdef __init__(self, name, age):\n\t\tself.name = name\n\t\tself.age = age\n\t\n\tdef greet(self):\n\t\treturn f'Hello, I am {self.name} and I am {self.age} years old.'\n\t\n\tdef is_adult(self):\n\t\treturn self.age >= 18\n\nperson = Person('Alice', 25)\nprint(person.greet())"
+  },
+  {
+    "title": "Dictionary Operations",
+    "code": "students = {\n\t'Alice': [85, 90, 78],\n\t'Bob': [92, 88, 84],\n\t'Charlie': [79, 85, 90]\n}\n\naverage_scores = {\n\tname: sum(scores) / len(scores)\n\tfor name, scores in students.items()\n}\n\nfor name, avg in average_scores.items():\n\tprint(f'{name}: {avg:.2f}')"
+  },
+  {
+    "title": "File Handling",
+    "code": "import json\n\ndata = {\n\t'users': [\n\t\t{'name': 'John', 'email': 'john@example.com'},\n\t\t{'name': 'Jane', 'email': 'jane@example.com'}\n\t]\n}\n\nwith open('users.json', 'w') as file:\n\tjson.dump(data, file, indent=2)\n\nwith open('users.json', 'r') as file:\n\tloaded_data = json.load(file)\n\tprint(loaded_data)"
+  }
+]

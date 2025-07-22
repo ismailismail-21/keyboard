@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Interactive Form",
+    "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n\t<meta charset=\"UTF-8\">\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\t<title>Contact Form</title>\n</head>\n<body>\n\t<form id=\"contactForm\" class=\"form-container\">\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"name\">Full Name:</label>\n\t\t\t<input type=\"text\" id=\"name\" name=\"name\" required>\n\t\t</div>\n\t\t\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"email\">Email:</label>\n\t\t\t<input type=\"email\" id=\"email\" name=\"email\" required>\n\t\t</div>\n\t\t\n\t\t<div class=\"form-group\">\n\t\t\t<label for=\"message\">Message:</label>\n\t\t\t<textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>\n\t\t</div>\n\t\t\n\t\t<button type=\"submit\">Send Message</button>\n\t</form>\n</body>\n</html>"
+  },
+  {
+    "title": "Card Component",
+    "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n\t<meta charset=\"UTF-8\">\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\t<title>Product Cards</title>\n</head>\n<body>\n\t<section class=\"products\">\n\t\t<article class=\"product-card\">\n\t\t\t<header class=\"card-header\">\n\t\t\t\t<img src=\"product1.jpg\" alt=\"Product 1\">\n\t\t\t</header>\n\t\t\t<div class=\"card-body\">\n\t\t\t\t<h3>Wireless Headphones</h3>\n\t\t\t\t<p>High-quality sound with noise cancellation</p>\n\t\t\t\t<div class=\"price\">$99.99</div>\n\t\t\t</div>\n\t\t\t<footer class=\"card-footer\">\n\t\t\t\t<button class=\"btn-primary\">Add to Cart</button>\n\t\t\t\t<button class=\"btn-secondary\">View Details</button>\n\t\t\t</footer>\n\t\t</article>\n\t</section>\n</body>\n</html>"
+  },
+  {
+    "title": "Navigation Menu",
+    "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n\t<meta charset=\"UTF-8\">\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n\t<title>Navigation</title>\n</head>\n<body>\n\t<nav class=\"navbar\">\n\t\t<div class=\"nav-container\">\n\t\t\t<div class=\"nav-logo\">\n\t\t\t\t<a href=\"#\">Logo</a>\n\t\t\t</div>\n\t\t\t<ul class=\"nav-menu\">\n\t\t\t\t<li class=\"nav-item\">\n\t\t\t\t\t<a href=\"#home\" class=\"nav-link\">Home</a>\n\t\t\t\t</li>\n\t\t\t\t<li class=\"nav-item\">\n\t\t\t\t\t<a href=\"#about\" class=\"nav-link\">About</a>\n\t\t\t\t</li>\n\t\t\t\t<li class=\"nav-item\">\n\t\t\t\t\t<a href=\"#services\" class=\"nav-link\">Services</a>\n\t\t\t\t</li>\n\t\t\t\t<li class=\"nav-item\">\n\t\t\t\t\t<a href=\"#contact\" class=\"nav-link\">Contact</a>\n\t\t\t\t</li>\n\t\t\t</ul>\n\t\t</div>\n\t</nav>\n</body>\n</html>"
+  }
+]

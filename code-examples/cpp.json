@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Vector Class",
+    "code": "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nclass Vector {\nprivate:\n\tstd::vector<int> data;\n\npublic:\n\tvoid add(int value) {\n\t\tdata.push_back(value);\n\t}\n\t\n\tvoid sort() {\n\t\tstd::sort(data.begin(), data.end());\n\t}\n\t\n\tvoid print() {\n\t\tfor (int val : data) {\n\t\t\tstd::cout << val << \" \";\n\t\t}\n\t\tstd::cout << std::endl;\n\t}\n};"
+  },
+  {
+    "title": "Template Function",
+    "code": "#include <iostream>\n\ntemplate<typename T>\nT findMax(T a, T b, T c) {\n\tT max = a;\n\tif (b > max) max = b;\n\tif (c > max) max = c;\n\treturn max;\n}\n\nint main() {\n\tint maxInt = findMax(10, 20, 15);\n\tdouble maxDouble = findMax(3.14, 2.71, 1.41);\n\t\n\tstd::cout << \"Max int: \" << maxInt << std::endl;\n\tstd::cout << \"Max double: \" << maxDouble << std::endl;\n\treturn 0;\n}"
+  },
+  {
+    "title": "Linked List",
+    "code": "#include <iostream>\n\nstruct Node {\n\tint data;\n\tNode* next;\n\t\n\tNode(int value) : data(value), next(nullptr) {}\n};\n\nclass LinkedList {\nprivate:\n\tNode* head;\n\npublic:\n\tLinkedList() : head(nullptr) {}\n\t\n\tvoid insert(int value) {\n\t\tNode* newNode = new Node(value);\n\t\tnewNode->next = head;\n\t\thead = newNode;\n\t}\n\t\n\tvoid display() {\n\t\tNode* current = head;\n\t\twhile (current) {\n\t\t\tstd::cout << current->data << \" \";\n\t\t\tcurrent = current->next;\n\t\t}\n\t\tstd::cout << std::endl;\n\t}\n};"
+  }
+]
